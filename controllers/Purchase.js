@@ -1,16 +1,18 @@
-import db from "../models/index.js"; 
+import db from "../models/index.js";
 
 const Purchase = db.Purchase;
 
 export const createPurchase = async (req, res) => {
   try {
-    const { design_uuid, user_uuid, status, date } = req.body;
+    const { design_uuid, user_uuid, status, shipping, name } = req.body;
 
     const purchase = await Purchase.create({
       design_uuid,
       user_uuid,
       status,
-      date,
+      shipping,
+      name,
+      date: new Date(),
     });
 
     res.status(201).json(purchase);
@@ -21,7 +23,16 @@ export const createPurchase = async (req, res) => {
 
 export const getAllPurchases = async (req, res) => {
   try {
-    const purchases = await Purchase.findAll();
+    const purchases = await Purchase.findAll(
+      {
+        include: [
+          {
+            model: db.User,
+            as: "user",
+          },
+        ],
+      }
+    );
 
     res.status(200).json(purchases);
   } catch (error) {
@@ -47,6 +58,21 @@ export const getPurchaseById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getUserPurchases = async (req, res) => {
+  try {
+    const purchases = await Purchase.findAll({
+      where: {
+        user_uuid: req.params.id,
+      },
+    });
+
+    return res.status(200).json(purchases);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 
 export const updatePurchase = async (req, res) => {
   try {

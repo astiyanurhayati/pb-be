@@ -1,37 +1,31 @@
 
 export default (sequelize, Sequelize) => {
-    const Purchase = sequelize.define("Purchase", {
+    const Address = sequelize.define("Address", {
         uuid: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
             primaryKey: true,
         },
-        design_uuid: {
-            type: Sequelize.UUID,
-            defaultValue: Sequelize.UUIDV4,
-            primaryKey: true,
-        },
-        name: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
         user_uuid: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
         },
-        shipping: {
-            type: Sequelize.ENUM(["JNE", "AnterAja"]),
+        city: {
+            type: Sequelize.STRING,
             allowNull: false
         },
-        status: {
+        province: {
             type: Sequelize.STRING,
-            defaultValue: "Waiting Confirmation",
-            allowNull: false,
+            allowNull: false
         },
-        date: {
-            type: Sequelize.DATE,
+        postal_code: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        address: {
+            type: Sequelize.STRING,
             allowNull: false
         }
     })
-    return Purchase;
+    return Address;
 }

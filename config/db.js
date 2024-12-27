@@ -1,9 +1,9 @@
 import "dotenv/config";
 
 export default {
-  username: process.env.DB_USERNAME,
+  username: "root",
   password: null,
-  database: process.env.DB_NAME,
+  database: "photobook",
   dialect: "mysql",
-  host: process.env.DB_HOST,
+  host: "127.0.0.1",
 };

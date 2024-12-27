@@ -71,19 +71,25 @@ export const logout = async (req, res) => {
 
 export const getSelf = async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.headers.authorization.split(" ")[1];
     const id = jwt.verify(token, process.env.SECRET).uuid;
     const user = await User.findOne({
       where: {
         uuid: id,
       },
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: db.Address,
+          as: "addresses",
+        },]
     });
     if (!user) {
       return res.status(404).json({ message: "User tidak ditemukan" });
     }
     return res.status(200).json(user);
   } catch (e) {
-    return res.status(500).json({ message: e, success: false });
+    return res.status(500).json({ message: e.message, success: false });
   }
 };
 export const getAll = async (req, res) => {
@@ -162,7 +168,7 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const { password, nama_lengkap, email } = req.body;
+    const { nama_lengkap, email } = req.body;
     const user = await User.findOne({
       where: {
         uuid: req.params.id,
@@ -174,7 +180,6 @@ export const updateUser = async (req, res) => {
 
     await user.update({
 
-      password: bcryptjs.hashSync(password, 8),
       nama_lengkap,
       email,
     });

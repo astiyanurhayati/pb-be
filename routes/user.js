@@ -11,4 +11,5 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/single", getSelf);
 
+
 export default router;

@@ -54,7 +54,7 @@ export const login = async (req, res) => {
     if (bcryptjs.compareSync(password, user.password))
       return res.status(200).json({ user, token });
 
-    return res.status(401).json({ message: "Password Salah!" });
+    return res.status(401).json({ message: "Invalid Email or Password!" });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }

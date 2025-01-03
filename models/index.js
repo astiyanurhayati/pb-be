@@ -6,6 +6,7 @@ import Purchase from "./Purchase.js";
 import config from "../config/db.js";
 import Address from "./Address.js";
 import Shipment from "./Shipment.js";
+import PurchaseTemp from "./PurchaseTemp.js";
 
 const sequelize = new Sequelize(
   config.database,
@@ -23,6 +24,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = User(sequelize, Sequelize);
 db.Purchase = Purchase(sequelize, Sequelize);
+db.PurchaseTemp = PurchaseTemp(sequelize, Sequelize);
 db.Shipment = Shipment(sequelize, Sequelize);
 
 db.Address = Address(sequelize, Sequelize);

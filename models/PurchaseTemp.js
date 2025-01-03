@@ -1,6 +1,6 @@
 
 export default (sequelize, Sequelize) => {
-    const Purchase = sequelize.define("Purchase", {
+    const PurchaseTemp = sequelize.define("PurchaseTemp", {
         uuid: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.UUIDV4,
@@ -53,6 +53,10 @@ export default (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true,
         },
+        order_id: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
     })
-    return Purchase;
+    return PurchaseTemp;
 }

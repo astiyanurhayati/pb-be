@@ -10,7 +10,7 @@ const app = express();
 db.sequelize.sync();
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://idceritaku.com"],
+    origin: ["http://localhost:3000", "https://idceritaku.com", "https://4a88-114-10-79-33.ngrok-free.app/"],
     credentials: true,
   })
 );

@@ -6,6 +6,8 @@ import {
   getUserPurchases,
   updatePurchase,
   deletePurchase,
+  paymentMethods,
+  doProccessWebhookMidtrans
 } from "../controllers/Purchase.js";
 
 const router = express.Router();
@@ -16,5 +18,7 @@ router.get("/purchases", getAllPurchases);
 router.get("/purchases/:id", getPurchaseById);
 router.put("/purchases/:id", updatePurchase);
 router.delete("/purchases/:id", deletePurchase);
+router.post("/payment", paymentMethods);
+router.post("/process-midtrans", doProccessWebhookMidtrans);
 
 export default router;

@@ -2,7 +2,7 @@ import "dotenv/config";
 
 export default {
   username: "root",
-  password: null,
+  password: '',
   database: "photobook",
   dialect: "mysql",
   host: "127.0.0.1",
